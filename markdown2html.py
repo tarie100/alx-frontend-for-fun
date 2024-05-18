@@ -47,8 +47,11 @@ if __name__ == '__main__':
                     if line.startswith(k):
                         html_line = line.replace(k, v[0]).replace('\n', v[1])
                         break
+                if '**' in line:
+                    html_line = line.replace('**', '<b>').replace('\n', '</b>\n')
+                elif '__' in line:
+                    html_line = line.replace('__', '<em>').replace('\n', '</em>\n')
                 wf.write(html_line)
 
     sys.exit(0)
-
 
