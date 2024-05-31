@@ -1,0 +1,11 @@
+/*Margin mixin*/
+@mixin marg($left, $right){
+	margin-left: $left;
+	margin-right: $right;
+}
+body{
+	@include marg(10px, 10px);
+}
+div{
+	@include marg(15px, 15px);
+}
