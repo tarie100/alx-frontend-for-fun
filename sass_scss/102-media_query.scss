@@ -1,0 +1,30 @@
+/*Media query #1*/
+h1 {
+  font-size: 20px;
+}
+
+// Adjust font size for h1 on screens smaller than 960px
+@media screen and (max-width: 960px) {
+  h1 {
+    font-size: 18px;
+  }
+}
+
+// Adjust font size for h1 on screens smaller than 640px
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 16px;
+  }
+}
+
+// Adjust font size for h1 on screens smaller than 320px
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 14px;
+  }
+
+  // Apply text color to h1 with class .small
+  h1.small {
+    color: #1D1D1D;
+  }
+}

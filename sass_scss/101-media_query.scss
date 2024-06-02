@@ -1,0 +1,10 @@
+/* Media query #0*/
+h1 {
+  font-size: 20px; // Default font size for h1
+}
+
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 14px; // Font size for h1 on smaller screens
+  }
+}

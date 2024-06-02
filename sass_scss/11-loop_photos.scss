@@ -1,0 +1,19 @@
+/* For each*/
+@import '11-photos';
+
+// Define the list of names and their corresponding background images
+$list-names: (
+  "Alice": "alice.jpg",
+  "Bob": "bob.jpg",
+  "Charlie": "charlie.jpg"
+);
+
+// Generate classes dynamically based on the names
+@each $name, $image in $list-names {
+  .bg-#{$name} {
+    background-image: url('images/#{$image}');
+    // Additional styling (e.g., background-size, background-repeat, etc.)
+    // ...
+  }
+}
+

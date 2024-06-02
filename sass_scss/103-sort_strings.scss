@@ -1,0 +1,21 @@
+/*sorting*/
+@each $item in $list_to_sort {
+  $sorted_array: append($sorted_array, $item);
+}
+
+// Sort the array (ascending order)
+@for $i from 1 through length($sorted_array) {
+  @for $j from $i through length($sorted_array) {
+    $item_i: nth($sorted_array, $i);
+    $item_j: nth($sorted_array, $j);
+
+    @if $item_i > $item_j {
+      $temp: $item_i;
+      $sorted_array: set-nth($sorted_array, $i, $item_j);
+      $sorted_array: set-nth($sorted_array, $j, $temp);
+    }
+  }
+}
+
+// Print the sorted list (debug output)
+@debug "Sorted list: #{$sorted_array}";
