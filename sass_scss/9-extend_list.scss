@@ -1,0 +1,16 @@
+/*9. Extended*/
+.info {
+  font-size: 12px;
+}
+
+// Extending .info style for .success class
+.success {
+  @extend .info;
+  color: #00FF00;
+}
+
+// Extending .info style for .warning class
+.warning {
+  @extend .info;
+  color: #FF0000;
+}
