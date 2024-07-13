@@ -1,21 +1,53 @@
-/*sorting*/
-@each $item in $list_to_sort {
-  $sorted_array: append($sorted_array, $item);
-}
+@import "103-sort_list";
 
-// Sort the array (ascending order)
-@for $i from 1 through length($sorted_array) {
-  @for $j from $i through length($sorted_array) {
-    $item_i: nth($sorted_array, $i);
-    $item_j: nth($sorted_array, $j);
 
-    @if $item_i > $item_j {
-      $temp: $item_i;
-      $sorted_array: set-nth($sorted_array, $i, $item_j);
-      $sorted_array: set-nth($sorted_array, $j, $temp);
+$default-order:
+  "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" !default;
+
+
+@function _str-compare($a, $b, $order) {
+  @if type-of($a) == "number" and type-of($b) == "number" {
+    @return $a < $b;
+  }
+
+  $a: to-lower-case($a);
+  $b: to-lower-case($b);
+
+  @for $i from 1 through min(str-length($a), str-length($b)) {
+    $char-a: str-slice($a, $i, $i);
+    $char-b: str-slice($b, $i, $i);
+
+    @if $char-a and $char-b and index($order, $char-a) != index($order, $char-b) {
+      @return index($order, $char-a) < index($order, $char-b);
     }
   }
+
+  @return str-length($a) < str-length($b);
 }
 
-// Print the sorted list (debug output)
-@debug "Sorted list: #{$sorted_array}";
+
+@function quick-sort($list, $order: $default-order) {
+  $less:  ();
+  $equal: ();
+  $large: ();
+
+  @if length($list) > 1 {
+    $seed: nth($list, ceil(length($list) / 2));
+
+    @each $item in $list {
+      @if $item == $seed {
+        $equal: append($equal, $item, list-separator($list));
+      } @else if _str-compare($item, $seed, $order) {
+        $less: append($less, $item, list-separator($list));
+      } @else if not _str-compare($item, $seed, $order) {
+        $large: append($large, $item, list-separator($list));
+      }
+    }
+
+    @return join(join(quick-sort($less, $order), $equal), quick-sort($large, $order));
+  }
+
+  @return $list;
+}
+
+@debug quick-sort($list_to_sort);
